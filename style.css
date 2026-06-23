@@ -49,55 +49,9 @@ body {
     position: relative;
 }
 
-/* SEMICIRCULO SUPERIOR */
+/* ARCO SUPERIOR OCULTO */
 #station-arc {
-    position: absolute;
-    top: 7%;
-    width: 100%;
-    height: 240px;
-    pointer-events: none;
-}
-
-.side-station {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    opacity: .22;
-    filter: blur(1px) saturate(.6);
-    transition: transform .25s ease, opacity .25s ease;
-    color: var(--text-soft);
-}
-
-.side-station img {
-    width: 64px;
-    height: auto;
-    margin-bottom: 8px;
-    object-fit: contain;
-}
-
-.side-station span {
-    font-size: .8rem;
-    text-align: center;
-    max-width: 100px;
-}
-
-#prev-left {
-    left: 10%;
-    top: 95px;
-    transform: scale(.82) rotate(-12deg);
-}
-
-#prev-center {
-    left: 50%;
-    top: 10px;
-    transform: translateX(-50%) scale(.65);
-}
-
-#prev-right {
-    right: 10%;
-    top: 95px;
-    transform: scale(.82) rotate(12deg);
+    display: none !important;
 }
 
 /* TARJETA PRINCIPAL */
@@ -157,6 +111,25 @@ body {
     text-transform: uppercase;
     text-shadow: 0 0 10px rgba(0, 255, 255, .45);
     line-height: 1.4;
+}
+
+/* INSTRUCCIONES GÓTICAS INFERIORES */
+#radio-instructions {
+    margin-top: 35px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    color: var(--text-soft);
+    opacity: 0.75;
+    font-family: 'UnifrakturMaguntia', serif;
+    font-size: 1.1rem;
+    text-shadow: 0 0 4px rgba(255, 0, 255, 0.2);
+}
+
+#radio-instructions span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 /* ESTADOS DE NEÓN INTERACTIVOS */
@@ -221,6 +194,5 @@ body.holding-off #station-logo {
     #radio-card { width: 85vw; min-height: 320px; }
     #logo-container { width: 160px; height: 160px; }
     #station-name { font-size: 1.1rem; }
-    .side-station img { width: 50px; }
-    .side-station span { font-size: .72rem; }
+    #radio-instructions { gap: 15px; font-size: 0.95rem; }
 }
