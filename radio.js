@@ -3,7 +3,7 @@ const stations = [
     
     // ESTA ES TU NUEVA SUB-CARPETA
     { 
-        name: "GTA", 
+        name: "GTA-Sa", 
         logo: "img/san.png", // Asigna aquí la carátula de la carpeta
         isFolder: true,
         subStations: [
@@ -55,7 +55,7 @@ function updateUI() {
     }
 
     stationLogo.src = current.logo;
-    stationName.textContent = current.isFolder ? `📂 ${current.name}` : current.name;
+    stationName.textContent = current.name;
 
     stationLogo.classList.remove("flash");
     requestAnimationFrame(() => {
