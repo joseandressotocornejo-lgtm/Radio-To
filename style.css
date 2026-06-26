@@ -49,7 +49,7 @@ body {
     position: relative;
 }
 
-/* BOTÓN DE CONFIGURACIÓN CYBERPUNK */
+/* BOTÓN CONFIGURACIÓN */
 #config-toggle {
     position: absolute;
     top: 25px;
@@ -91,10 +91,10 @@ body {
     align-items: center;
     justify-content: center;
     padding: 30px;
-    transition: transform .1s ease, box-shadow .18s ease;
+    transition: transform .1s ease, box-shadow .18s ease, border-color 0.2s ease;
 }
 
-/* LOGO CENTRAL Y ANIMACIÓN DE ROTACIÓN */
+/* CONTENEDOR LOGO */
 #logo-container {
     width: 190px;
     height: 190px;
@@ -108,14 +108,21 @@ body {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
-    border-radius: 50%;
+    border-radius: 50%; /* Por defecto circulares como CD */
     filter:
         drop-shadow(0 0 10px var(--cyan))
         drop-shadow(0 0 25px rgba(0, 255, 255, .25));
-    transition: transform .2s ease, filter .2s ease;
+    transition: transform .2s ease, filter .2s ease, border-radius 0.2s ease;
 }
 
-/* Rotación continua limpia */
+/* REGLAS ESPECÍFICAS PARA LA IMAGEN DE RADIO OFF (ESTÁTICA, COMPLETA Y CUADRADA) */
+#station-logo.is-radio-off {
+    border-radius: 0% !important; /* Cuadrado e íntegro */
+    animation: none !important;    /* Inmune a cualquier rotación */
+    transform: none !important;
+}
+
+/* ROTACIÓN CONTINUA */
 .rotating {
     animation: rotateDisk 8s linear infinite !important;
 }
@@ -125,7 +132,7 @@ body {
     to { transform: rotate(360deg); }
 }
 
-/* NOMBRE DE ESTACIÓN */
+/* NOMBRE */
 #station-name {
     color: var(--text);
     text-align: center;
@@ -137,7 +144,7 @@ body {
     line-height: 1.4;
 }
 
-/* INSTRUCCIONES INFERIORES */
+/* INSTRUCCIONES */
 #radio-instructions {
     margin-top: 35px;
     display: flex;
@@ -150,7 +157,7 @@ body {
     text-shadow: 0 0 4px rgba(255, 0, 255, 0.2);
 }
 
-/* PANEL OVERLAY CONFIGURACIÓN */
+/* PANEL CONFIGURACIÓN */
 #config-panel {
     position: fixed;
     top: 0;
@@ -235,7 +242,7 @@ body {
     text-transform: none;
 }
 
-/* SECCIÓN CRÉDITOS */
+/* CRÉDITOS */
 #credits-section h3 {
     font-family: 'UnifrakturMaguntia', serif;
     font-size: 1.1rem;
@@ -251,9 +258,9 @@ body {
     margin-bottom: 4px;
 }
 
-/* ESTADOS DINÁMICOS AL ARRASTRAR */
-body.holding-change #radio-card { border-color: #00ff80; box-shadow: 0 0 18px #00ff80; }
-body.holding-off #radio-card { border-color: #ff0055; box-shadow: 0 0 18px #ff0055; }
+/* GESTOS DINÁMICOS */
+body.holding-change #radio-card { border-color: #00ff80 !important; box-shadow: 0 0 18px #00ff80 !important; }
+body.holding-off #radio-card { border-color: #ff0055 !important; box-shadow: 0 0 18px #ff0055 !important; }
 
 /* FLASH */
 .flash { animation: flashGlow .25s ease; }
