@@ -108,17 +108,17 @@ body {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
-    border-radius: 50%; /* Por defecto circulares como CD */
+    border-radius: 50%;
     filter:
         drop-shadow(0 0 10px var(--cyan))
         drop-shadow(0 0 25px rgba(0, 255, 255, .25));
     transition: transform .2s ease, filter .2s ease, border-radius 0.2s ease;
 }
 
-/* REGLAS ESPECÍFICAS PARA LA IMAGEN DE RADIO OFF (ESTÁTICA, COMPLETA Y CUADRADA) */
+/* LOGO DE RADIO OFF COMPLETO Y ESTÁTICO */
 #station-logo.is-radio-off {
-    border-radius: 0% !important; /* Cuadrado e íntegro */
-    animation: none !important;    /* Inmune a cualquier rotación */
+    border-radius: 0% !important;
+    animation: none !important;
     transform: none !important;
 }
 
@@ -186,9 +186,11 @@ body {
     color: var(--text);
 }
 
+/* TITULOS CON LETRA NORMAL */
 #config-content h2 {
-    font-family: 'UnifrakturMaguntia', serif;
-    font-size: 1.4rem;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
     letter-spacing: 2px;
     text-align: center;
     margin-bottom: 10px;
@@ -242,10 +244,11 @@ body {
     text-transform: none;
 }
 
-/* CRÉDITOS */
+/* SECCIÓN CRÉDITOS CON LETRA NORMAL */
 #credits-section h3 {
-    font-family: 'UnifrakturMaguntia', serif;
-    font-size: 1.1rem;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
     letter-spacing: 1px;
     color: var(--cyan);
     margin-bottom: 8px;
