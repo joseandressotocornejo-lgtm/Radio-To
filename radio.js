@@ -57,6 +57,8 @@ const colors = {
     yellow: "#ffff00"
 };
 
+const colorArray = ["#00ffff", "#ff00ff", "#00ff80", "#ffff00"];
+
 function playMenuSfx() {
     menuSfx.currentTime = 0;
     menuSfx.play().catch(() => {});
@@ -67,6 +69,13 @@ function updateUI() {
 
     stationLogo.src = current.logo;
     stationName.textContent = current.name;
+
+    // Controlar si la imagen de Radio Off debe ser estática y cuadrada
+    if (current.name === "Radio Off") {
+        stationLogo.classList.add("is-radio-off");
+    } else {
+        stationLogo.classList.remove("is-radio-off");
+    }
 
     stationLogo.classList.remove("flash");
     requestAnimationFrame(() => {
@@ -146,7 +155,7 @@ function checkEnterFolder() {
     return false;
 }
 
-// MANEJO DE CONFIGURACIONES
+// CONFIGURACIONES
 configToggle.addEventListener("click", (e) => {
     e.stopPropagation();
     configPanel.classList.toggle("hidden");
@@ -182,15 +191,17 @@ rhythmControl.addEventListener("change", (e) => {
 
 function manageRotationState() {
     let isPlaying = !audio.paused && audio.src !== "";
-    // Aseguramos la adición/remoción de la clase de rotación en el elemento de la carátula
-    if (rotationControl.checked && isPlaying) {
+    let current = (subIdx === -1) ? stations[currentIdx] : stations[currentIdx].subStations[subIdx];
+
+    // NUNCA rotar la carátula si la estación es Radio Off
+    if (rotationControl.checked && isPlaying && current.name !== "Radio Off") {
         stationLogo.classList.add("rotating");
     } else {
         stationLogo.classList.remove("rotating");
     }
 }
 
-// Efecto procedural independiente de parpadeo neón (Sin problemas de red/CORS)
+// Ritmo Procedural con Cambio Dinámico de Color Multicolor
 function startPulseEffect() {
     stopPulseEffect();
     if (!rhythmControl.checked || audio.paused || !audio.src) return;
@@ -198,13 +209,22 @@ function startPulseEffect() {
     function animatePulse() {
         if (audio.paused) {
             radioCard.style.transform = "";
+            radioCard.style.borderColor = "var(--cyan)";
+            radioCard.style.boxShadow = "0 0 18px var(--cyan)";
             return;
         }
         let time = performance.now() * 0.007;
         let pulseWave = Math.sin(time) * Math.cos(time * 0.4);
         let scaleFactor = 1 + Math.max(0, pulseWave * 0.025);
         
+        // Ciclo procedural multicolor basado en el tiempo
+        let colorIdx = Math.floor((time * 0.25) % colorArray.length);
+        let dynamicColor = colorArray[colorIdx];
+
         radioCard.style.transform = `scale(${scaleFactor})`;
+        radioCard.style.borderColor = dynamicColor;
+        radioCard.style.boxShadow = `0 0 ${15 + (pulseWave * 10)}px ${dynamicColor}`;
+        
         pulseFrameId = requestAnimationFrame(animatePulse);
     }
     animatePulse();
@@ -216,9 +236,11 @@ function stopPulseEffect() {
         pulseFrameId = null;
     }
     radioCard.style.transform = "";
+    radioCard.style.borderColor = "var(--cyan)";
+    radioCard.style.boxShadow = "0 0 18px var(--cyan)";
 }
 
-// LÓGICA DE GESTOS
+// GESTOS TÁCTILES
 function pointerDown(event) {
     if (event.target.closest('#config-panel') || event.target.closest('#config-toggle')) return;
     const touch = event.touches ? event.touches[0] : event;
